@@ -5,14 +5,15 @@ import com.dwarfeng.subgrade.sdk.bean.key.HibernateLongIdKey;
 import com.dwarfeng.subgrade.stack.bean.Bean;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Optional;
 
 @Entity
 @IdClass(HibernateLongIdKey.class)
-@Table(name = "tbl_checker_info")
-public class HibernateCheckerInfo implements Bean {
+@Table(name = "tbl_alarm_info")
+public class HibernateAlarmInfo implements Bean {
 
-    private static final long serialVersionUID = -8990845955809806850L;
+    private static final long serialVersionUID = 7184336714662844590L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -20,17 +21,24 @@ public class HibernateCheckerInfo implements Bean {
     private Long longId;
 
     // -----------------------------------------------------------主属性字段-----------------------------------------------------------
-    @Column(name = "enabled", nullable = false)
-    private boolean enabled;
+    @Column(name = "limit_capacity", nullable = false)
+    private long limitCapacity;
 
-    @Column(name = "type", length = Constraints.LENGTH_TYPE)
-    private String type;
+    @Column(name = "actual_capacity", nullable = false)
+    private long actualCapacity;
 
-    @Column(name = "content", columnDefinition = "TEXT")
-    private String content;
+    @Column(name = "ratio", nullable = false)
+    private double ratio;
 
-    @Column(name = "remark", length = Constraints.LENGTH_REMARK)
-    private String remark;
+    @Column(name = "happened_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date happenedDate;
+
+    @Column(name = "alarm_message", length = Constraints.LENGTH_ALARM_MESSAGE)
+    private String alarmMessage;
+
+    @Column(name = "alarming")
+    private boolean alarming;
 
     // -----------------------------------------------------------一对一-----------------------------------------------------------
     @OneToOne(targetEntity = HibernateSection.class)
@@ -39,7 +47,7 @@ public class HibernateCheckerInfo implements Bean {
     })
     private HibernateSection section;
 
-    public HibernateCheckerInfo() {
+    public HibernateAlarmInfo() {
     }
 
     // -----------------------------------------------------------映射用 getter&setter-----------------------------------------------------------
@@ -60,36 +68,52 @@ public class HibernateCheckerInfo implements Bean {
         this.longId = longId;
     }
 
-    public boolean isEnabled() {
-        return enabled;
+    public long getLimitCapacity() {
+        return limitCapacity;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setLimitCapacity(long limitCapacity) {
+        this.limitCapacity = limitCapacity;
     }
 
-    public String getType() {
-        return type;
+    public long getActualCapacity() {
+        return actualCapacity;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setActualCapacity(long actualCapacity) {
+        this.actualCapacity = actualCapacity;
     }
 
-    public String getContent() {
-        return content;
+    public double getRatio() {
+        return ratio;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setRatio(double ratio) {
+        this.ratio = ratio;
     }
 
-    public String getRemark() {
-        return remark;
+    public Date getHappenedDate() {
+        return happenedDate;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setHappenedDate(Date happenedDate) {
+        this.happenedDate = happenedDate;
+    }
+
+    public String getAlarmMessage() {
+        return alarmMessage;
+    }
+
+    public void setAlarmMessage(String alarmMessage) {
+        this.alarmMessage = alarmMessage;
+    }
+
+    public boolean isAlarming() {
+        return alarming;
+    }
+
+    public void setAlarming(boolean alarming) {
+        this.alarming = alarming;
     }
 
     public HibernateSection getSection() {
@@ -104,10 +128,12 @@ public class HibernateCheckerInfo implements Bean {
     public String toString() {
         return getClass().getSimpleName() + "(" +
                 "longId = " + longId + ", " +
-                "enabled = " + enabled + ", " +
-                "type = " + type + ", " +
-                "content = " + content + ", " +
-                "remark = " + remark + ", " +
+                "limitCapacity = " + limitCapacity + ", " +
+                "actualCapacity = " + actualCapacity + ", " +
+                "ratio = " + ratio + ", " +
+                "happenedDate = " + happenedDate + ", " +
+                "alarmMessage = " + alarmMessage + ", " +
+                "alarming = " + alarming + ", " +
                 "section = " + section + ")";
     }
 }

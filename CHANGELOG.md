@@ -14,6 +14,7 @@
   - com.dwarfeng.capacitychecker.stack.bean.entity.DriverInfo。
   - com.dwarfeng.capacitychecker.stack.bean.entity.DriverSupport。
   - com.dwarfeng.capacitychecker.stack.bean.entity.Section。
+  - com.dwarfeng.capacitychecker.stack.bean.entity.AlarmInfo。
 
 #### Bug修复
 

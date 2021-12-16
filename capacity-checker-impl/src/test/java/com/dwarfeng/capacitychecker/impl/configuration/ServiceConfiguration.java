@@ -26,6 +26,7 @@ public class ServiceConfiguration {
     private final CheckerSupportDao checkerSupportDao;
     private final CheckHistoryDao checkHistoryDao;
     private final AlarmSettingDao alarmSettingDao;
+    private final AlarmInfoDao alarmInfoDao;
 
     public ServiceConfiguration(
             ServiceExceptionMapperConfiguration serviceExceptionMapperConfiguration,
@@ -35,7 +36,8 @@ public class ServiceConfiguration {
             CheckerInfoDao checkerInfoDao,
             CheckerSupportDao checkerSupportDao,
             CheckHistoryDao checkHistoryDao,
-            AlarmSettingDao alarmSettingDao
+            AlarmSettingDao alarmSettingDao,
+            AlarmInfoDao alarmInfoDao
     ) {
         this.serviceExceptionMapperConfiguration = serviceExceptionMapperConfiguration;
         this.sectionCrudOperation = sectionCrudOperation;
@@ -46,6 +48,7 @@ public class ServiceConfiguration {
         this.checkerSupportDao = checkerSupportDao;
         this.checkHistoryDao = checkHistoryDao;
         this.alarmSettingDao = alarmSettingDao;
+        this.alarmInfoDao = alarmInfoDao;
     }
 
     @Bean
@@ -235,6 +238,34 @@ public class ServiceConfiguration {
     public DaoOnlyPresetLookupService<AlarmSetting> alarmSettingDaoOnlyPresetLookupService() {
         return new DaoOnlyPresetLookupService<>(
                 alarmSettingDao,
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN
+        );
+    }
+
+    @Bean
+    public DaoOnlyBatchCrudService<LongIdKey, AlarmInfo> alarmInfoDaoOnlyBatchCrudService() {
+        return new DaoOnlyBatchCrudService<>(
+                alarmInfoDao,
+                longIdKeyKeyFetcher(),
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN
+        );
+    }
+
+    @Bean
+    public DaoOnlyEntireLookupService<AlarmInfo> alarmInfoDaoOnlyEntireLookupService() {
+        return new DaoOnlyEntireLookupService<>(
+                alarmInfoDao,
+                serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
+                LogLevel.WARN
+        );
+    }
+
+    @Bean
+    public DaoOnlyPresetLookupService<AlarmInfo> alarmInfoDaoOnlyPresetLookupService() {
+        return new DaoOnlyPresetLookupService<>(
+                alarmInfoDao,
                 serviceExceptionMapperConfiguration.mapServiceExceptionMapper(),
                 LogLevel.WARN
         );

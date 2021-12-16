@@ -36,7 +36,10 @@ public class HibernateSection implements Bean {
 
     // -----------------------------------------------------------一对一-----------------------------------------------------------
     @OneToOne(cascade = CascadeType.MERGE, targetEntity = HibernateCheckerInfo.class, mappedBy = "section")
-    private HibernateCheckerInfo workerInfo;
+    private HibernateCheckerInfo checkerInfo;
+
+    @OneToOne(cascade = CascadeType.MERGE, targetEntity = HibernateAlarmInfo.class, mappedBy = "section")
+    private HibernateAlarmInfo alarmInfo;
 
     // -----------------------------------------------------------一对多-----------------------------------------------------------
     @OneToMany(cascade = CascadeType.MERGE, targetEntity = HibernateDriverInfo.class, mappedBy = "section")
@@ -98,12 +101,20 @@ public class HibernateSection implements Bean {
         this.remark = remark;
     }
 
-    public HibernateCheckerInfo getWorkerInfo() {
-        return workerInfo;
+    public HibernateCheckerInfo getCheckerInfo() {
+        return checkerInfo;
     }
 
-    public void setWorkerInfo(HibernateCheckerInfo workerInfo) {
-        this.workerInfo = workerInfo;
+    public void setCheckerInfo(HibernateCheckerInfo checkerInfo) {
+        this.checkerInfo = checkerInfo;
+    }
+
+    public HibernateAlarmInfo getAlarmInfo() {
+        return alarmInfo;
+    }
+
+    public void setAlarmInfo(HibernateAlarmInfo alarmInfo) {
+        this.alarmInfo = alarmInfo;
     }
 
     public Set<HibernateDriverInfo> getDriverInfos() {
@@ -130,6 +141,7 @@ public class HibernateSection implements Bean {
                 "enabled = " + enabled + ", " +
                 "limitCapacity = " + limitCapacity + ", " +
                 "remark = " + remark + ", " +
-                "workerInfo = " + workerInfo + ")";
+                "checkerInfo = " + checkerInfo + ", " +
+                "alarmInfo = " + alarmInfo + ")";
     }
 }

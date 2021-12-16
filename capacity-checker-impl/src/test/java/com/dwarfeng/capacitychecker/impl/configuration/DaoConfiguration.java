@@ -31,6 +31,7 @@ public class DaoConfiguration {
     private final CheckerSupportPresetCriteriaMaker checkerSupportPresetCriteriaMaker;
     private final CheckHistoryPresetCriteriaMaker checkHistoryPresetCriteriaMaker;
     private final AlarmSettingPresetCriteriaMaker alarmSettingPresetCriteriaMaker;
+    private final AlarmInfoPresetCriteriaMaker alarmInfoPresetCriteriaMaker;
 
     @Value("${hibernate.jdbc.batch_size}")
     private int batchSize;
@@ -42,7 +43,8 @@ public class DaoConfiguration {
             DriverSupportPresetCriteriaMaker driverSupportPresetCriteriaMaker,
             CheckerSupportPresetCriteriaMaker checkerSupportPresetCriteriaMaker,
             CheckHistoryPresetCriteriaMaker checkHistoryPresetCriteriaMaker,
-            AlarmSettingPresetCriteriaMaker alarmSettingPresetCriteriaMaker
+            AlarmSettingPresetCriteriaMaker alarmSettingPresetCriteriaMaker,
+            AlarmInfoPresetCriteriaMaker alarmInfoPresetCriteriaMaker
     ) {
         this.hibernateTemplate = hibernateTemplate;
         this.mapper = mapper;
@@ -52,6 +54,7 @@ public class DaoConfiguration {
         this.checkerSupportPresetCriteriaMaker = checkerSupportPresetCriteriaMaker;
         this.checkHistoryPresetCriteriaMaker = checkHistoryPresetCriteriaMaker;
         this.alarmSettingPresetCriteriaMaker = alarmSettingPresetCriteriaMaker;
+        this.alarmInfoPresetCriteriaMaker = alarmInfoPresetCriteriaMaker;
     }
 
     @Bean
@@ -261,6 +264,38 @@ public class DaoConfiguration {
                 new DozerBeanTransformer<>(AlarmSetting.class, HibernateAlarmSetting.class, mapper),
                 HibernateAlarmSetting.class,
                 alarmSettingPresetCriteriaMaker
+        );
+    }
+
+    @Bean
+    public HibernateBatchBaseDao<LongIdKey, HibernateLongIdKey, AlarmInfo, HibernateAlarmInfo>
+    alarmInfoHibernateBatchBaseDao() {
+        return new HibernateBatchBaseDao<>(
+                hibernateTemplate,
+                new DozerBeanTransformer<>(LongIdKey.class, HibernateLongIdKey.class, mapper),
+                new DozerBeanTransformer<>(AlarmInfo.class, HibernateAlarmInfo.class, mapper),
+                HibernateAlarmInfo.class,
+                new DefaultDeletionMod<>(),
+                batchSize
+        );
+    }
+
+    @Bean
+    public HibernateEntireLookupDao<AlarmInfo, HibernateAlarmInfo> alarmInfoHibernateEntireLookupDao() {
+        return new HibernateEntireLookupDao<>(
+                hibernateTemplate,
+                new DozerBeanTransformer<>(AlarmInfo.class, HibernateAlarmInfo.class, mapper),
+                HibernateAlarmInfo.class
+        );
+    }
+
+    @Bean
+    public HibernatePresetLookupDao<AlarmInfo, HibernateAlarmInfo> alarmInfoHibernatePresetLookupDao() {
+        return new HibernatePresetLookupDao<>(
+                hibernateTemplate,
+                new DozerBeanTransformer<>(AlarmInfo.class, HibernateAlarmInfo.class, mapper),
+                HibernateAlarmInfo.class,
+                alarmInfoPresetCriteriaMaker
         );
     }
 }

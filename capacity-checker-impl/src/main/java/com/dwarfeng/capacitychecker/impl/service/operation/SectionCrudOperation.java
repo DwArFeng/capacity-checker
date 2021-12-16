@@ -3,10 +3,7 @@ package com.dwarfeng.capacitychecker.impl.service.operation;
 import com.dwarfeng.capacitychecker.stack.bean.entity.AlarmSetting;
 import com.dwarfeng.capacitychecker.stack.bean.entity.DriverInfo;
 import com.dwarfeng.capacitychecker.stack.bean.entity.Section;
-import com.dwarfeng.capacitychecker.stack.dao.AlarmSettingDao;
-import com.dwarfeng.capacitychecker.stack.dao.CheckerInfoDao;
-import com.dwarfeng.capacitychecker.stack.dao.DriverInfoDao;
-import com.dwarfeng.capacitychecker.stack.dao.SectionDao;
+import com.dwarfeng.capacitychecker.stack.dao.*;
 import com.dwarfeng.capacitychecker.stack.service.AlarmSettingMaintainService;
 import com.dwarfeng.capacitychecker.stack.service.DriverInfoMaintainService;
 import com.dwarfeng.subgrade.sdk.service.custom.operation.BatchCrudOperation;
@@ -23,17 +20,20 @@ public class SectionCrudOperation implements BatchCrudOperation<LongIdKey, Secti
     private final DriverInfoDao driverInfoDao;
     private final CheckerInfoDao checkerInfoDao;
     private final AlarmSettingDao alarmSettingDao;
+    private final AlarmInfoDao alarmInfoDao;
 
     public SectionCrudOperation(
             SectionDao sectionDao,
             DriverInfoDao driverInfoDao,
             CheckerInfoDao checkerInfoDao,
-            AlarmSettingDao alarmSettingDao
+            AlarmSettingDao alarmSettingDao,
+            AlarmInfoDao alarmInfoDao
     ) {
         this.sectionDao = sectionDao;
         this.driverInfoDao = driverInfoDao;
         this.checkerInfoDao = checkerInfoDao;
         this.alarmSettingDao = alarmSettingDao;
+        this.alarmInfoDao = alarmInfoDao;
     }
 
     @Override
@@ -73,6 +73,11 @@ public class SectionCrudOperation implements BatchCrudOperation<LongIdKey, Secti
                 AlarmSettingMaintainService.CHILD_FOR_SECTION_THRESHOLD_DESC, new Object[]{key}
         ).stream().map(AlarmSetting::getKey).collect(Collectors.toList());
         alarmSettingDao.batchDelete(alarmSettingKeys);
+
+        // 删除与部件相关的报警信息。
+        if (alarmInfoDao.exists(key)) {
+            alarmInfoDao.delete(key);
+        }
 
         // 删除部件自身。
         sectionDao.delete(key);
