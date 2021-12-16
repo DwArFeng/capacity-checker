@@ -16,6 +16,8 @@
   - com.dwarfeng.capacitychecker.stack.bean.entity.Section。
   - com.dwarfeng.capacitychecker.stack.bean.entity.AlarmInfo。
 
+- 完成容量检查调度逻辑。
+
 #### Bug修复
 
 - (无)

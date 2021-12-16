@@ -22,6 +22,9 @@ public class DriverInfoPresetCriteriaMaker implements PresetCriteriaMaker {
             case DriverInfoMaintainService.CHILD_FOR_SECTION:
                 childForPoint(detachedCriteria, objects);
                 break;
+            case DriverInfoMaintainService.CHILD_FOR_SECTION_ENABLED:
+                childForSectionEnabled(detachedCriteria, objects);
+                break;
             case DriverInfoMaintainService.CHILD_FOR_SECTION_SET:
                 childForPointSet(detachedCriteria, objects);
                 break;
@@ -41,6 +44,21 @@ public class DriverInfoPresetCriteriaMaker implements PresetCriteriaMaker {
                 LongIdKey longIdKey = (LongIdKey) objects[0];
                 detachedCriteria.add(Restrictions.eqOrIsNull("sectionLongId", longIdKey.getLongId()));
             }
+            detachedCriteria.addOrder(Order.asc("longId"));
+        } catch (Exception e) {
+            throw new IllegalArgumentException("非法的参数:" + Arrays.toString(objects));
+        }
+    }
+
+    private void childForSectionEnabled(DetachedCriteria detachedCriteria, Object[] objects) {
+        try {
+            if (Objects.isNull(objects[0])) {
+                detachedCriteria.add(Restrictions.isNull("sectionLongId"));
+            } else {
+                LongIdKey longIdKey = (LongIdKey) objects[0];
+                detachedCriteria.add(Restrictions.eqOrIsNull("sectionLongId", longIdKey.getLongId()));
+            }
+            detachedCriteria.add(Restrictions.eq("enabled", true));
             detachedCriteria.addOrder(Order.asc("longId"));
         } catch (Exception e) {
             throw new IllegalArgumentException("非法的参数:" + Arrays.toString(objects));

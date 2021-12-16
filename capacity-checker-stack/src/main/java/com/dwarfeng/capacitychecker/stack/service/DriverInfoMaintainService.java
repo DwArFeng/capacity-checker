@@ -16,6 +16,7 @@ public interface DriverInfoMaintainService extends BatchCrudService<LongIdKey, D
         EntireLookupService<DriverInfo>, PresetLookupService<DriverInfo> {
 
     String CHILD_FOR_SECTION = "child_for_section";
+    String CHILD_FOR_SECTION_ENABLED = "child_for_section_enabled";
     String CHILD_FOR_SECTION_SET = "child_for_section_set";
     String ENABLED_CHILD_FOR_SECTION = "enabled_child_for_section";
 }
