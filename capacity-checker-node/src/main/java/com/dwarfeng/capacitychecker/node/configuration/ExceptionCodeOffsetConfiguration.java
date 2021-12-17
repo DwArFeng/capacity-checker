@@ -1,4 +1,4 @@
-package com.dwarfeng.capacitychecker.impl.configuration;
+package com.dwarfeng.capacitychecker.node.configuration;
 
 import com.dwarfeng.capacitychecker.sdk.bean.util.ServiceExceptionCodes;
 import org.springframework.beans.factory.annotation.Value;
