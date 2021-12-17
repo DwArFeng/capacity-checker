@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 public class FastJsonAlarmInfo implements Bean {
 
-    private static final long serialVersionUID = -1370594829639018928L;
+    private static final long serialVersionUID = 8461873353671791232L;
 
     public static FastJsonAlarmInfo of(AlarmInfo alarmInfo) {
         if (Objects.isNull(alarmInfo)) {
@@ -25,7 +25,7 @@ public class FastJsonAlarmInfo implements Bean {
             return new FastJsonAlarmInfo(
                     FastJsonLongIdKey.of(alarmInfo.getKey()), alarmInfo.getLimitCapacity(),
                     alarmInfo.getActualCapacity(), alarmInfo.getRatio(), alarmInfo.getHappenedDate(),
-                    alarmInfo.getAlarmMessage(), alarmInfo.isAlarming()
+                    alarmInfo.getAlarmMessage(), alarmInfo.isAlarming(), alarmInfo.getCheckedDevice()
             );
         }
     }
@@ -51,12 +51,15 @@ public class FastJsonAlarmInfo implements Bean {
     @JSONField(name = "alarming", ordinal = 7)
     private boolean alarming;
 
+    @JSONField(name = "checked_device", ordinal = 8)
+    private int checkedDevice;
+
     public FastJsonAlarmInfo() {
     }
 
     public FastJsonAlarmInfo(
             FastJsonLongIdKey key, long limitCapacity, long actualCapacity, double ratio, Date happenedDate,
-            String alarmMessage, boolean alarming
+            String alarmMessage, boolean alarming, int checkedDevice
     ) {
         this.key = key;
         this.limitCapacity = limitCapacity;
@@ -65,6 +68,7 @@ public class FastJsonAlarmInfo implements Bean {
         this.happenedDate = happenedDate;
         this.alarmMessage = alarmMessage;
         this.alarming = alarming;
+        this.checkedDevice = checkedDevice;
     }
 
     public FastJsonLongIdKey getKey() {
@@ -123,6 +127,14 @@ public class FastJsonAlarmInfo implements Bean {
         this.alarming = alarming;
     }
 
+    public int getCheckedDevice() {
+        return checkedDevice;
+    }
+
+    public void setCheckedDevice(int checkedDevice) {
+        this.checkedDevice = checkedDevice;
+    }
+
     @Override
     public String toString() {
         return "FastJsonAlarmInfo{" +
@@ -133,6 +145,7 @@ public class FastJsonAlarmInfo implements Bean {
                 ", happenedDate=" + happenedDate +
                 ", alarmMessage='" + alarmMessage + '\'' +
                 ", alarming=" + alarming +
+                ", checkedDevice=" + checkedDevice +
                 '}';
     }
 }

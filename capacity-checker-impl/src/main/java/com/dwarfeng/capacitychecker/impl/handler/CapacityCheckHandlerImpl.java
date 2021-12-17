@@ -16,6 +16,7 @@ import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
 import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -32,6 +33,9 @@ public class CapacityCheckHandlerImpl implements CapacityCheckHandler {
     private final AlarmInfoMaintainService alarmInfoMaintainService;
 
     private final LocalCacheHandler localCacheHandler;
+
+    @Value("${cachk.current_device}")
+    private int currentDevice;
 
     private final Lock lock = new ReentrantLock();
     private final Set<Driver> usedDrivers = new HashSet<>();
@@ -67,7 +71,7 @@ public class CapacityCheckHandlerImpl implements CapacityCheckHandler {
             if (!onlineFlag) {
                 // 获取所有启用的部件。
                 List<Section> sections = sectionMaintainService.lookup(
-                        SectionMaintainService.ENABLED, new Object[]{}
+                        SectionMaintainService.ENABLED_MATCH_DEVICE, new Object[]{currentDevice}
                 ).getData();
                 // 注册所有驱动成功标志。
                 boolean successFlag = true;
@@ -190,8 +194,7 @@ public class CapacityCheckHandlerImpl implements CapacityCheckHandler {
 
             // 根据检查结果生成检查历史，并计入历史表。
             CheckHistory checkHistory = new CheckHistory(
-                    null, sectionKey, limitCapacity, actualCapacity, ratio, happenedDate
-            );
+                    null, sectionKey, limitCapacity, actualCapacity, ratio, happenedDate, currentDevice);
             checkHistoryMaintainService.insert(checkHistory);
 
             // 获取指定部件的所有报警设置。
@@ -210,7 +213,8 @@ public class CapacityCheckHandlerImpl implements CapacityCheckHandler {
 
             // 更新报警信息。
             AlarmInfo alarmInfo = new AlarmInfo(
-                    sectionKey, limitCapacity, actualCapacity, ratio, happenedDate, alarmMessage, alarming
+                    sectionKey, limitCapacity, actualCapacity, ratio, happenedDate, alarmMessage, alarming,
+                    currentDevice
             );
             alarmInfoMaintainService.insertOrUpdate(alarmInfo);
         } catch (HandlerException e) {

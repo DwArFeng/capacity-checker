@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class AlarmInfo implements Entity<LongIdKey> {
 
-    private static final long serialVersionUID = 940825460712340240L;
+    private static final long serialVersionUID = 1433575906482170318L;
 
     private LongIdKey key;
     private long limitCapacity;
@@ -22,13 +22,14 @@ public class AlarmInfo implements Entity<LongIdKey> {
     private Date happenedDate;
     private String alarmMessage;
     private boolean alarming;
+    private int checkedDevice;
 
     public AlarmInfo() {
     }
 
     public AlarmInfo(
             LongIdKey key, long limitCapacity, long actualCapacity, double ratio, Date happenedDate,
-            String alarmMessage, boolean alarming
+            String alarmMessage, boolean alarming, int checkedDevice
     ) {
         this.key = key;
         this.limitCapacity = limitCapacity;
@@ -37,6 +38,7 @@ public class AlarmInfo implements Entity<LongIdKey> {
         this.happenedDate = happenedDate;
         this.alarmMessage = alarmMessage;
         this.alarming = alarming;
+        this.checkedDevice = checkedDevice;
     }
 
     @Override
@@ -97,6 +99,14 @@ public class AlarmInfo implements Entity<LongIdKey> {
         this.alarming = alarming;
     }
 
+    public int getCheckedDevice() {
+        return checkedDevice;
+    }
+
+    public void setCheckedDevice(int checkedDevice) {
+        this.checkedDevice = checkedDevice;
+    }
+
     @Override
     public String toString() {
         return "AlarmInfo{" +
@@ -107,6 +117,7 @@ public class AlarmInfo implements Entity<LongIdKey> {
                 ", happenedDate=" + happenedDate +
                 ", alarmMessage='" + alarmMessage + '\'' +
                 ", alarming=" + alarming +
+                ", checkedDevice=" + checkedDevice +
                 '}';
     }
 }

@@ -21,6 +21,9 @@ public class SectionPresetCriteriaMaker implements PresetCriteriaMaker {
             case SectionMaintainService.ENABLED:
                 enabled(detachedCriteria, objects);
                 break;
+            case SectionMaintainService.ENABLED_MATCH_DEVICE:
+                enabledMatchDevice(detachedCriteria, objects);
+                break;
             default:
                 throw new IllegalArgumentException("无法识别的预设: " + s);
         }
@@ -38,6 +41,16 @@ public class SectionPresetCriteriaMaker implements PresetCriteriaMaker {
     private void enabled(DetachedCriteria detachedCriteria, Object[] objects) {
         try {
             detachedCriteria.add(Restrictions.eq("enabled", true));
+        } catch (Exception e) {
+            throw new IllegalArgumentException("非法的参数:" + Arrays.toString(objects));
+        }
+    }
+
+    private void enabledMatchDevice(DetachedCriteria detachedCriteria, Object[] objects) {
+        try {
+            int device = (int) objects[0];
+            detachedCriteria.add(Restrictions.eq("enabled", true));
+            detachedCriteria.add(Restrictions.eqOrIsNull("requiredDevice", device));
         } catch (Exception e) {
             throw new IllegalArgumentException("非法的参数:" + Arrays.toString(objects));
         }

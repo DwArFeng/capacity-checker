@@ -17,4 +17,5 @@ public interface SectionMaintainService extends BatchCrudService<LongIdKey, Sect
 
     String NAME_LIKE = "name_like";
     String ENABLED = "enabled";
+    String ENABLED_MATCH_DEVICE = "enabled_match_device";
 }

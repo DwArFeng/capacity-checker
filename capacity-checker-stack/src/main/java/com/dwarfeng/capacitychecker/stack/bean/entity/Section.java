@@ -11,23 +11,27 @@ import com.dwarfeng.subgrade.stack.bean.key.LongIdKey;
  */
 public class Section implements Entity<LongIdKey> {
 
-    private static final long serialVersionUID = 7854561771177578203L;
+    private static final long serialVersionUID = -8694375547325180271L;
 
     private LongIdKey key;
     private String name;
     private boolean enabled;
     private long limitCapacity;
     private String remark;
+    private Integer requiredDevice;
 
     public Section() {
     }
 
-    public Section(LongIdKey key, String name, boolean enabled, long limitCapacity, String remark) {
+    public Section(
+            LongIdKey key, String name, boolean enabled, long limitCapacity, String remark, Integer requiredDevice
+    ) {
         this.key = key;
         this.name = name;
         this.enabled = enabled;
         this.limitCapacity = limitCapacity;
         this.remark = remark;
+        this.requiredDevice = requiredDevice;
     }
 
     @Override
@@ -72,6 +76,14 @@ public class Section implements Entity<LongIdKey> {
         this.remark = remark;
     }
 
+    public Integer getRequiredDevice() {
+        return requiredDevice;
+    }
+
+    public void setRequiredDevice(Integer requiredDevice) {
+        this.requiredDevice = requiredDevice;
+    }
+
     @Override
     public String toString() {
         return "Section{" +
@@ -80,6 +92,7 @@ public class Section implements Entity<LongIdKey> {
                 ", enabled=" + enabled +
                 ", limitCapacity=" + limitCapacity +
                 ", remark='" + remark + '\'' +
+                ", requiredDevice=" + requiredDevice +
                 '}';
     }
 }

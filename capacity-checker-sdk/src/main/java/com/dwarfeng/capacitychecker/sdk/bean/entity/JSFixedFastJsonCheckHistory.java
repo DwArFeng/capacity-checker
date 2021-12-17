@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 public class JSFixedFastJsonCheckHistory implements Bean {
 
-    private static final long serialVersionUID = -2277753919759774818L;
+    private static final long serialVersionUID = -7092163127609693213L;
 
     public JSFixedFastJsonCheckHistory of(CheckHistory checkHistory) {
         if (Objects.isNull(checkHistory)) {
@@ -25,7 +25,8 @@ public class JSFixedFastJsonCheckHistory implements Bean {
             return new JSFixedFastJsonCheckHistory(
                     JSFixedFastJsonLongIdKey.of(checkHistory.getKey()),
                     JSFixedFastJsonLongIdKey.of(checkHistory.getSectionKey()), checkHistory.getLimitCapacity(),
-                    checkHistory.getActualCapacity(), checkHistory.getRatio(), checkHistory.getHappenedDate()
+                    checkHistory.getActualCapacity(), checkHistory.getRatio(), checkHistory.getHappenedDate(),
+                    checkHistory.getCheckedDevice()
             );
         }
     }
@@ -48,12 +49,15 @@ public class JSFixedFastJsonCheckHistory implements Bean {
     @JSONField(name = "happened_date", ordinal = 6)
     private Date happenedDate;
 
+    @JSONField(name = "checked_device", ordinal = 7)
+    private int checkedDevice;
+
     public JSFixedFastJsonCheckHistory() {
     }
 
     public JSFixedFastJsonCheckHistory(
             JSFixedFastJsonLongIdKey key, JSFixedFastJsonLongIdKey sectionKey, long limitCapacity, long actualCapacity,
-            double ratio, Date happenedDate
+            double ratio, Date happenedDate, int checkedDevice
     ) {
         this.key = key;
         this.sectionKey = sectionKey;
@@ -61,6 +65,7 @@ public class JSFixedFastJsonCheckHistory implements Bean {
         this.actualCapacity = actualCapacity;
         this.ratio = ratio;
         this.happenedDate = happenedDate;
+        this.checkedDevice = checkedDevice;
     }
 
     public JSFixedFastJsonLongIdKey getKey() {
@@ -111,6 +116,14 @@ public class JSFixedFastJsonCheckHistory implements Bean {
         this.happenedDate = happenedDate;
     }
 
+    public int getCheckedDevice() {
+        return checkedDevice;
+    }
+
+    public void setCheckedDevice(int checkedDevice) {
+        this.checkedDevice = checkedDevice;
+    }
+
     @Override
     public String toString() {
         return "JSFixedFastJsonCheckHistory{" +
@@ -120,6 +133,7 @@ public class JSFixedFastJsonCheckHistory implements Bean {
                 ", actualCapacity=" + actualCapacity +
                 ", ratio=" + ratio +
                 ", happenedDate=" + happenedDate +
+                ", checkedDevice=" + checkedDevice +
                 '}';
     }
 }

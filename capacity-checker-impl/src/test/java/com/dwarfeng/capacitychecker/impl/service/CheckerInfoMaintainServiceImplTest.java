@@ -29,9 +29,7 @@ public class CheckerInfoMaintainServiceImplTest {
 
     @Before
     public void setUp() {
-        parentSection = new Section(
-                null, "parent-section", true, 12450L, "test-section"
-        );
+        parentSection = new Section(null, "parent-section", true, 12450L, "test-section", 12450);
         checkerInfo = new CheckerInfo(
                 parentSection.getKey(), true, "checker-info", "this is a test", "test"
         );

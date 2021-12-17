@@ -13,7 +13,7 @@ import java.util.Optional;
 @Table(name = "tbl_alarm_info")
 public class HibernateAlarmInfo implements Bean {
 
-    private static final long serialVersionUID = 7184336714662844590L;
+    private static final long serialVersionUID = -1415561843826200228L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -39,6 +39,9 @@ public class HibernateAlarmInfo implements Bean {
 
     @Column(name = "alarming")
     private boolean alarming;
+
+    @Column(name = "checked_device", nullable = false)
+    private int checkedDevice;
 
     // -----------------------------------------------------------一对一-----------------------------------------------------------
     @OneToOne(targetEntity = HibernateSection.class)
@@ -116,6 +119,14 @@ public class HibernateAlarmInfo implements Bean {
         this.alarming = alarming;
     }
 
+    public int getCheckedDevice() {
+        return checkedDevice;
+    }
+
+    public void setCheckedDevice(int checkedDevice) {
+        this.checkedDevice = checkedDevice;
+    }
+
     public HibernateSection getSection() {
         return section;
     }
@@ -134,6 +145,7 @@ public class HibernateAlarmInfo implements Bean {
                 "happenedDate = " + happenedDate + ", " +
                 "alarmMessage = " + alarmMessage + ", " +
                 "alarming = " + alarming + ", " +
+                "checkedDevice = " + checkedDevice + ", " +
                 "section = " + section + ")";
     }
 }

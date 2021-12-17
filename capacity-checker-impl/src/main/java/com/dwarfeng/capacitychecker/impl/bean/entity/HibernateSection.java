@@ -14,7 +14,7 @@ import java.util.Set;
 @Table(name = "tbl_section")
 public class HibernateSection implements Bean {
 
-    private static final long serialVersionUID = 1189294685141084586L;
+    private static final long serialVersionUID = -7982067401060965892L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -33,6 +33,9 @@ public class HibernateSection implements Bean {
 
     @Column(name = "remark", length = Constraints.LENGTH_REMARK)
     private String remark;
+
+    @Column(name = "required_device")
+    private Integer requiredDevice;
 
     // -----------------------------------------------------------一对一-----------------------------------------------------------
     @OneToOne(cascade = CascadeType.MERGE, targetEntity = HibernateCheckerInfo.class, mappedBy = "section")
@@ -101,6 +104,14 @@ public class HibernateSection implements Bean {
         this.remark = remark;
     }
 
+    public Integer getRequiredDevice() {
+        return requiredDevice;
+    }
+
+    public void setRequiredDevice(Integer requiredDevice) {
+        this.requiredDevice = requiredDevice;
+    }
+
     public HibernateCheckerInfo getCheckerInfo() {
         return checkerInfo;
     }
@@ -141,6 +152,7 @@ public class HibernateSection implements Bean {
                 "enabled = " + enabled + ", " +
                 "limitCapacity = " + limitCapacity + ", " +
                 "remark = " + remark + ", " +
+                "requiredDevice = " + requiredDevice + ", " +
                 "checkerInfo = " + checkerInfo + ", " +
                 "alarmInfo = " + alarmInfo + ")";
     }

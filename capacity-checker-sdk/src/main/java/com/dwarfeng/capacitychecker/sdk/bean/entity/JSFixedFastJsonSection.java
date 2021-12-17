@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 public class JSFixedFastJsonSection implements Bean {
 
-    private static final long serialVersionUID = 9020770545866167832L;
+    private static final long serialVersionUID = 1045984654504398663L;
 
     public static JSFixedFastJsonSection of(Section section) {
         if (Objects.isNull(section)) {
@@ -23,7 +23,7 @@ public class JSFixedFastJsonSection implements Bean {
         }
         return new JSFixedFastJsonSection(
                 JSFixedFastJsonLongIdKey.of(section.getKey()), section.getName(), section.isEnabled(),
-                section.getLimitCapacity(), section.getRemark()
+                section.getLimitCapacity(), section.getRemark(), section.getRequiredDevice()
         );
     }
 
@@ -42,17 +42,22 @@ public class JSFixedFastJsonSection implements Bean {
     @JSONField(name = "remark", ordinal = 5)
     private String remark;
 
+    @JSONField(name = "required_device", ordinal = 6)
+    private Integer requiredDevice;
+
     public JSFixedFastJsonSection() {
     }
 
     public JSFixedFastJsonSection(
-            JSFixedFastJsonLongIdKey key, String name, boolean enabled, long limitCapacity, String remark
+            JSFixedFastJsonLongIdKey key, String name, boolean enabled, long limitCapacity, String remark,
+            Integer requiredDevice
     ) {
         this.key = key;
         this.name = name;
         this.enabled = enabled;
         this.limitCapacity = limitCapacity;
         this.remark = remark;
+        this.requiredDevice = requiredDevice;
     }
 
     public JSFixedFastJsonLongIdKey getKey() {
@@ -95,6 +100,14 @@ public class JSFixedFastJsonSection implements Bean {
         this.remark = remark;
     }
 
+    public Integer getRequiredDevice() {
+        return requiredDevice;
+    }
+
+    public void setRequiredDevice(Integer requiredDevice) {
+        this.requiredDevice = requiredDevice;
+    }
+
     @Override
     public String toString() {
         return "JSFixedFastJsonSection{" +
@@ -103,6 +116,7 @@ public class JSFixedFastJsonSection implements Bean {
                 ", enabled=" + enabled +
                 ", limitCapacity=" + limitCapacity +
                 ", remark='" + remark + '\'' +
+                ", requiredDevice=" + requiredDevice +
                 '}';
     }
 }

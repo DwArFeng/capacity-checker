@@ -33,9 +33,7 @@ public class AlarmSettingMaintainServiceImplTest {
 
     @Before
     public void setUp() {
-        parentSection = new Section(
-                new LongIdKey(Long.MAX_VALUE), "name", true, 12450L, "remark"
-        );
+        parentSection = new Section(new LongIdKey(Long.MAX_VALUE), "name", true, 12450L, "remark", 12450);
         alarmSettings = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             AlarmSetting alarmSetting = new AlarmSetting(

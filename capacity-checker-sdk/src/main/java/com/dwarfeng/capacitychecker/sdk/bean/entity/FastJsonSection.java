@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 public class FastJsonSection implements Bean {
 
-    private static final long serialVersionUID = 2754727304579892968L;
+    private static final long serialVersionUID = 8678359714552886722L;
 
     public static FastJsonSection of(Section section) {
         if (Objects.isNull(section)) {
@@ -23,7 +23,7 @@ public class FastJsonSection implements Bean {
         }
         return new FastJsonSection(
                 FastJsonLongIdKey.of(section.getKey()), section.getName(), section.isEnabled(),
-                section.getLimitCapacity(), section.getRemark()
+                section.getLimitCapacity(), section.getRemark(), section.getRequiredDevice()
         );
     }
 
@@ -42,15 +42,22 @@ public class FastJsonSection implements Bean {
     @JSONField(name = "remark", ordinal = 5)
     private String remark;
 
+    @JSONField(name = "required_device", ordinal = 6)
+    private Integer requiredDevice;
+
     public FastJsonSection() {
     }
 
-    public FastJsonSection(FastJsonLongIdKey key, String name, boolean enabled, long limitCapacity, String remark) {
+    public FastJsonSection(
+            FastJsonLongIdKey key, String name, boolean enabled, long limitCapacity, String remark,
+            Integer requiredDevice
+    ) {
         this.key = key;
         this.name = name;
         this.enabled = enabled;
         this.limitCapacity = limitCapacity;
         this.remark = remark;
+        this.requiredDevice = requiredDevice;
     }
 
     public FastJsonLongIdKey getKey() {
@@ -93,6 +100,14 @@ public class FastJsonSection implements Bean {
         this.remark = remark;
     }
 
+    public Integer getRequiredDevice() {
+        return requiredDevice;
+    }
+
+    public void setRequiredDevice(Integer requiredDevice) {
+        this.requiredDevice = requiredDevice;
+    }
+
     @Override
     public String toString() {
         return "FastJsonSection{" +
@@ -101,6 +116,7 @@ public class FastJsonSection implements Bean {
                 ", enabled=" + enabled +
                 ", limitCapacity=" + limitCapacity +
                 ", remark='" + remark + '\'' +
+                ", requiredDevice=" + requiredDevice +
                 '}';
     }
 }

@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class CheckHistory implements Entity<LongIdKey> {
 
-    private static final long serialVersionUID = -3068507861362140065L;
+    private static final long serialVersionUID = 980963141212715495L;
 
     private LongIdKey key;
     private LongIdKey sectionKey;
@@ -21,13 +21,14 @@ public class CheckHistory implements Entity<LongIdKey> {
     private long actualCapacity;
     private double ratio;
     private Date happenedDate;
+    private int checkedDevice;
 
     public CheckHistory() {
     }
 
     public CheckHistory(
             LongIdKey key, LongIdKey sectionKey, long limitCapacity, long actualCapacity, double ratio,
-            Date happenedDate
+            Date happenedDate, int checkedDevice
     ) {
         this.key = key;
         this.sectionKey = sectionKey;
@@ -35,6 +36,7 @@ public class CheckHistory implements Entity<LongIdKey> {
         this.actualCapacity = actualCapacity;
         this.ratio = ratio;
         this.happenedDate = happenedDate;
+        this.checkedDevice = checkedDevice;
     }
 
     @Override
@@ -87,6 +89,14 @@ public class CheckHistory implements Entity<LongIdKey> {
         this.happenedDate = happenedDate;
     }
 
+    public int getCheckedDevice() {
+        return checkedDevice;
+    }
+
+    public void setCheckedDevice(int checkedDevice) {
+        this.checkedDevice = checkedDevice;
+    }
+
     @Override
     public String toString() {
         return "CheckHistory{" +
@@ -96,6 +106,7 @@ public class CheckHistory implements Entity<LongIdKey> {
                 ", actualCapacity=" + actualCapacity +
                 ", ratio=" + ratio +
                 ", happenedDate=" + happenedDate +
+                ", checkedDevice=" + checkedDevice +
                 '}';
     }
 }

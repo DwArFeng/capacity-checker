@@ -31,13 +31,11 @@ public class CheckHistoryMaintainServiceImplTest {
 
     @Before
     public void setUp() {
-        parentSection = new Section(
-                null, "parent-section", true, 12450L, "test-section"
-        );
+        parentSection = new Section(null, "parent-section", true, 12450L, "test-section", 12450);
         statisticsHistories = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             CheckHistory checkHistory = new CheckHistory(
-                    null, parentSection.getKey(), 12450L, 12450L, 1.0, new Date()
+                    null, parentSection.getKey(), 12450L, 12450L, 1.0, new Date(), 12450
             );
             statisticsHistories.add(checkHistory);
         }

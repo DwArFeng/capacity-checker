@@ -32,9 +32,7 @@ public class DriverInfoMaintainServiceImplTest {
 
     @Before
     public void setUp() {
-        parentSection = new Section(
-                null, "parent-section", true, 12450L, "test-section"
-        );
+        parentSection = new Section(null, "parent-section", true, 12450L, "test-section", 12450);
         driverInfos = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             DriverInfo driverInfo = new DriverInfo(

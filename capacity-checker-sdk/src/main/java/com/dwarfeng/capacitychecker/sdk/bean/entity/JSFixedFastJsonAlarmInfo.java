@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 public class JSFixedFastJsonAlarmInfo implements Bean {
 
-    private static final long serialVersionUID = -8589441877555340295L;
+    private static final long serialVersionUID = -2767994098114471998L;
 
     public static JSFixedFastJsonAlarmInfo of(AlarmInfo alarmInfo) {
         if (Objects.isNull(alarmInfo)) {
@@ -26,7 +26,7 @@ public class JSFixedFastJsonAlarmInfo implements Bean {
             return new JSFixedFastJsonAlarmInfo(
                     JSFixedFastJsonLongIdKey.of(alarmInfo.getKey()), alarmInfo.getLimitCapacity(),
                     alarmInfo.getActualCapacity(), alarmInfo.getRatio(), alarmInfo.getHappenedDate(),
-                    alarmInfo.getAlarmMessage(), alarmInfo.isAlarming()
+                    alarmInfo.getAlarmMessage(), alarmInfo.isAlarming(), alarmInfo.getCheckedDevice()
             );
         }
     }
@@ -52,12 +52,15 @@ public class JSFixedFastJsonAlarmInfo implements Bean {
     @JSONField(name = "alarming", ordinal = 7)
     private boolean alarming;
 
+    @JSONField(name = "checked_device", ordinal = 8)
+    private int checkedDevice;
+
     public JSFixedFastJsonAlarmInfo() {
     }
 
     public JSFixedFastJsonAlarmInfo(
             JSFixedFastJsonLongIdKey key, long limitCapacity, long actualCapacity, double ratio, Date happenedDate,
-            String alarmMessage, boolean alarming
+            String alarmMessage, boolean alarming, int checkedDevice
     ) {
         this.key = key;
         this.limitCapacity = limitCapacity;
@@ -66,6 +69,7 @@ public class JSFixedFastJsonAlarmInfo implements Bean {
         this.happenedDate = happenedDate;
         this.alarmMessage = alarmMessage;
         this.alarming = alarming;
+        this.checkedDevice = checkedDevice;
     }
 
     public JSFixedFastJsonLongIdKey getKey() {
@@ -124,6 +128,14 @@ public class JSFixedFastJsonAlarmInfo implements Bean {
         this.alarming = alarming;
     }
 
+    public int getCheckedDevice() {
+        return checkedDevice;
+    }
+
+    public void setCheckedDevice(int checkedDevice) {
+        this.checkedDevice = checkedDevice;
+    }
+
     @Override
     public String toString() {
         return "JSFixedFastJsonAlarmInfo{" +
@@ -134,6 +146,7 @@ public class JSFixedFastJsonAlarmInfo implements Bean {
                 ", happenedDate=" + happenedDate +
                 ", alarmMessage='" + alarmMessage + '\'' +
                 ", alarming=" + alarming +
+                ", checkedDevice=" + checkedDevice +
                 '}';
     }
 }

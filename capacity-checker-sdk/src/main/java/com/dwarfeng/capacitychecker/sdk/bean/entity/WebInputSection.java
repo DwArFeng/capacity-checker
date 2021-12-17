@@ -2,6 +2,7 @@ package com.dwarfeng.capacitychecker.sdk.bean.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.dwarfeng.capacitychecker.sdk.bean.util.Constraints;
+import com.dwarfeng.capacitychecker.stack.bean.entity.Section;
 import com.dwarfeng.subgrade.sdk.bean.key.WebInputLongIdKey;
 import com.dwarfeng.subgrade.stack.bean.Bean;
 import org.hibernate.validator.constraints.Length;
@@ -10,6 +11,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
+import java.util.Objects;
 
 /**
  * WebInput 部件。
@@ -19,7 +21,23 @@ import javax.validation.constraints.PositiveOrZero;
  */
 public class WebInputSection implements Bean {
 
-    private static final long serialVersionUID = -7531053111858369612L;
+    private static final long serialVersionUID = 465460206073425395L;
+
+    public static Section toStackBean(WebInputSection webInputSection) {
+        if (Objects.isNull(webInputSection)) {
+            return null;
+        }
+
+        return new Section(
+                WebInputLongIdKey.toStackBean(webInputSection.getKey()),
+                webInputSection.getName(),
+                webInputSection.isEnabled(),
+                webInputSection.getLimitCapacity(),
+                webInputSection.getRemark(),
+                webInputSection.getRequiredDevice()
+        );
+    }
+
     @JSONField(name = "key")
     @Valid
     private WebInputLongIdKey key;
@@ -40,6 +58,10 @@ public class WebInputSection implements Bean {
     @JSONField(name = "remark")
     @Length(max = Constraints.LENGTH_REMARK)
     private String remark;
+
+    @JSONField(name = "required_device")
+    @PositiveOrZero
+    private Integer requiredDevice;
 
     public WebInputSection() {
     }
@@ -84,6 +106,14 @@ public class WebInputSection implements Bean {
         this.remark = remark;
     }
 
+    public Integer getRequiredDevice() {
+        return requiredDevice;
+    }
+
+    public void setRequiredDevice(Integer requiredDevice) {
+        this.requiredDevice = requiredDevice;
+    }
+
     @Override
     public String toString() {
         return "WebInputSection{" +
@@ -92,6 +122,7 @@ public class WebInputSection implements Bean {
                 ", enabled=" + enabled +
                 ", limitCapacity=" + limitCapacity +
                 ", remark='" + remark + '\'' +
+                ", requiredDevice=" + requiredDevice +
                 '}';
     }
 }

@@ -12,7 +12,7 @@ import java.util.Optional;
 @Table(name = "tbl_check_history")
 public class HibernateCheckHistory implements Bean {
 
-    private static final long serialVersionUID = -920746894414305838L;
+    private static final long serialVersionUID = 4048366429987151051L;
 
     // -----------------------------------------------------------主键-----------------------------------------------------------
     @Id
@@ -36,6 +36,9 @@ public class HibernateCheckHistory implements Bean {
     @Column(name = "happened_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date happenedDate;
+
+    @Column(name = "checked_device", nullable = false)
+    private int checkedDevice;
 
     public HibernateCheckHistory() {
     }
@@ -106,6 +109,14 @@ public class HibernateCheckHistory implements Bean {
         this.happenedDate = happenedDate;
     }
 
+    public int getCheckedDevice() {
+        return checkedDevice;
+    }
+
+    public void setCheckedDevice(int checkedDevice) {
+        this.checkedDevice = checkedDevice;
+    }
+
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" +
@@ -114,6 +125,7 @@ public class HibernateCheckHistory implements Bean {
                 "limitCapacity = " + limitCapacity + ", " +
                 "actualCapacity = " + actualCapacity + ", " +
                 "ratio = " + ratio + ", " +
-                "happenedDate = " + happenedDate + ")";
+                "happenedDate = " + happenedDate + ", " +
+                "checkedDevice = " + checkedDevice + ")";
     }
 }

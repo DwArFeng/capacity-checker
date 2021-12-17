@@ -29,9 +29,7 @@ public class SectionMaintainServiceImplTest {
     public void setUp() {
         sections = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            Section section = new Section(
-                    null, "section-" + (i + 1), true, 12450L, "test-section"
-            );
+            Section section = new Section(null, "section-" + (i + 1), true, 12450L, "test-section", 12450);
             sections.add(section);
         }
     }

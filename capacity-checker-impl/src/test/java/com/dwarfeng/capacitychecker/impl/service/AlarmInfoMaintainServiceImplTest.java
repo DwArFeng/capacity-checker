@@ -33,8 +33,10 @@ public class AlarmInfoMaintainServiceImplTest {
 
     @Before
     public void setUp() {
-        parentSection = new Section(new LongIdKey(Long.MAX_VALUE), "name", true, 10240, "remark");
-        alarmInfo = new AlarmInfo(new LongIdKey(Long.MAX_VALUE), 10240, 1024, 0.1, new Date(), "alarm_message", true);
+        parentSection = new Section(new LongIdKey(Long.MAX_VALUE), "name", true, 10240, "remark", 12450);
+        alarmInfo = new AlarmInfo(
+                new LongIdKey(Long.MAX_VALUE), 10240, 1024, 0.1, new Date(), "alarm_message", true, 12450
+        );
     }
 
     @After
