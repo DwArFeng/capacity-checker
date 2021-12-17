@@ -13,9 +13,9 @@
     <context:component-scan base-package="com.dwarfeng.capacitychecker.impl.service"/>
     <!--扫描handler的实现包。 -->
     <context:component-scan base-package="com.dwarfeng.capacitychecker.impl.handler">
-        <context:exclude-filter type="regex" expression="^com\.dwarfeng\.capacitychecker\.handler\.driver.*$"/>
-        <context:exclude-filter type="regex" expression="^com\.dwarfeng\.capacitychecker\.handler\.checker.*$"/>
-        <context:exclude-filter type="regex" expression="^com\.dwarfeng\.capacitychecker\.handler\.pusher.*$"/>
+        <context:exclude-filter type="regex" expression="^com\.dwarfeng\.capacitychecker\.impl\.handler\.driver.*$"/>
+        <context:exclude-filter type="regex" expression="^com\.dwarfeng\.capacitychecker\.impl\.handler\.checker.*$"/>
+        <context:exclude-filter type="regex" expression="^com\.dwarfeng\.capacitychecker\.impl\.handler\.pusher.*$"/>
     </context:component-scan>
     <!--扫描dao的实现包。 -->
     <context:component-scan base-package="com.dwarfeng.capacitychecker.impl.dao"/>

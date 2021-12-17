@@ -20,6 +20,14 @@
 
 - 完成 node 模块，程序启动以及打包测试通过。
 
+- 实现驱动器模块。
+  - com.dwarfeng.capacitychecker.impl.handler.driver.CronDriverProvider。
+  - com.dwarfeng.capacitychecker.impl.handler.driver.CronDriverSupporter。
+  - com.dwarfeng.capacitychecker.impl.handler.driver.FixedDelayDriverProvider。
+  - com.dwarfeng.capacitychecker.impl.handler.driver.FixedDelayDriverSupporter。
+  - com.dwarfeng.capacitychecker.impl.handler.driver.FixedRateDriverProvider。
+  - com.dwarfeng.capacitychecker.impl.handler.driver.FixedRateDriverSupporter。
+
 #### Bug修复
 
 - (无)
