@@ -28,6 +28,12 @@
   - com.dwarfeng.capacitychecker.impl.handler.driver.FixedRateDriverProvider。
   - com.dwarfeng.capacitychecker.impl.handler.driver.FixedRateDriverSupporter。
 
+- 实现推送器模块。
+  - com.dwarfeng.capacitychecker.impl.handler.pusher.DrainPusher。
+  - com.dwarfeng.capacitychecker.impl.handler.pusher.LogPusher。
+  - com.dwarfeng.capacitychecker.impl.handler.pusher.MultiPusher。
+  - com.dwarfeng.capacitychecker.impl.handler.pusher.PartialDrainPusher。
+
 #### Bug修复
 
 - (无)

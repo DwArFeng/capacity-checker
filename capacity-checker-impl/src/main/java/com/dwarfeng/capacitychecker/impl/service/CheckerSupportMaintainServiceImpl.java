@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -44,7 +44,7 @@ public class CheckerSupportMaintainServiceImpl implements CheckerSupportMaintain
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;
         this.presetLookupService = presetLookupService;
-        this.checkerSupporters = Objects.isNull(checkerSupporters) ? new ArrayList<>() : checkerSupporters;
+        this.checkerSupporters = Objects.isNull(checkerSupporters) ? Collections.emptyList() : checkerSupporters;
         this.sem = sem;
     }
 

@@ -7,7 +7,7 @@ import com.dwarfeng.subgrade.stack.exception.HandlerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,7 +20,7 @@ public class DriverHandlerImpl implements DriverHandler {
     public DriverHandlerImpl(
             @Autowired List<DriverProvider> driverProviders
     ) {
-        this.driverProviders = Objects.isNull(driverProviders) ? new ArrayList<>() : driverProviders;
+        this.driverProviders = Objects.isNull(driverProviders) ? Collections.emptyList() : driverProviders;
     }
 
     @Override

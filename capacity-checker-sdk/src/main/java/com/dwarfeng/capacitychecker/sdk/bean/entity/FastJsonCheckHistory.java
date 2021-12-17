@@ -16,9 +16,9 @@ import java.util.Objects;
  */
 public class FastJsonCheckHistory implements Bean {
 
-    private static final long serialVersionUID = 8390970989242495446L;
+    private static final long serialVersionUID = -6999596794908537879L;
 
-    public FastJsonCheckHistory of(CheckHistory checkHistory) {
+    public static FastJsonCheckHistory of(CheckHistory checkHistory) {
         if (Objects.isNull(checkHistory)) {
             return null;
         } else {

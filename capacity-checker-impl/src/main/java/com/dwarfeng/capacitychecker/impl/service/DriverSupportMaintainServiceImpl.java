@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,7 +43,7 @@ public class DriverSupportMaintainServiceImpl implements DriverSupportMaintainSe
         this.crudService = crudService;
         this.entireLookupService = entireLookupService;
         this.presetLookupService = presetLookupService;
-        this.driverSupporters = Objects.isNull(driverSupporters) ? new ArrayList<>() : driverSupporters;
+        this.driverSupporters = Objects.isNull(driverSupporters) ? Collections.emptyList() : driverSupporters;
         this.sem = sem;
     }
 
