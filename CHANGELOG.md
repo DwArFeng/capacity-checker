@@ -34,6 +34,11 @@
   - com.dwarfeng.capacitychecker.impl.handler.pusher.MultiPusher。
   - com.dwarfeng.capacitychecker.impl.handler.pusher.PartialDrainPusher。
 
+- 实现检查器模块。
+  - com.dwarfeng.capacitychecker.impl.handler.checker.AbstractCheckerRegistry。
+  - com.dwarfeng.capacitychecker.impl.handler.checker.FileSizeCheckerRegistry。
+  - com.dwarfeng.capacitychecker.impl.handler.checker.GroovyCheckerRegistry。
+
 #### Bug修复
 
 - (无)
