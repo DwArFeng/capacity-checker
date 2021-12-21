@@ -20,13 +20,13 @@ import java.io.File;
  * @since 1.0.0
  */
 @Component
-public class FileSizeCheckerRegistry extends AbstractCheckerRegistry {
+public class FileCheckerRegistry extends AbstractCheckerRegistry {
 
-    public static final String CHECKER_TYPE = "file_size_checker";
+    public static final String CHECKER_TYPE = "file_checker";
 
     private final ApplicationContext ctx;
 
-    public FileSizeCheckerRegistry(ApplicationContext ctx) {
+    public FileCheckerRegistry(ApplicationContext ctx) {
         super(CHECKER_TYPE);
         this.ctx = ctx;
     }
@@ -49,7 +49,7 @@ public class FileSizeCheckerRegistry extends AbstractCheckerRegistry {
     @Override
     public Checker makeChecker(CheckerInfo checkerInfo) throws CheckerException {
         try {
-            FileSizeChecker checker = ctx.getBean(FileSizeChecker.class);
+            FileChecker checker = ctx.getBean(FileChecker.class);
             checker.setPath(checkerInfo.getContent());
             return checker;
         } catch (Exception e) {
@@ -59,11 +59,11 @@ public class FileSizeCheckerRegistry extends AbstractCheckerRegistry {
 
     @Component
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public static class FileSizeChecker implements Checker {
+    public static class FileChecker implements Checker {
 
         private String path;
 
-        public FileSizeChecker() {
+        public FileChecker() {
         }
 
         @Override

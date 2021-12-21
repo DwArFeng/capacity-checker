@@ -9,6 +9,7 @@ import com.dwarfeng.capacitychecker.stack.exception.SectionNotExistsException;
 import com.dwarfeng.capacitychecker.stack.handler.CapacityCheckHandler;
 import com.dwarfeng.capacitychecker.stack.handler.Driver;
 import com.dwarfeng.capacitychecker.stack.handler.LocalCacheHandler;
+import com.dwarfeng.capacitychecker.stack.handler.PushHandler;
 import com.dwarfeng.capacitychecker.stack.service.AlarmInfoMaintainService;
 import com.dwarfeng.capacitychecker.stack.service.CheckHistoryMaintainService;
 import com.dwarfeng.capacitychecker.stack.service.SectionMaintainService;
@@ -34,6 +35,8 @@ public class CapacityCheckHandlerImpl implements CapacityCheckHandler {
 
     private final LocalCacheHandler localCacheHandler;
 
+    private final PushHandler pushHandler;
+
     @Value("${cachk.current_device}")
     private int currentDevice;
 
@@ -45,12 +48,14 @@ public class CapacityCheckHandlerImpl implements CapacityCheckHandler {
             SectionMaintainService sectionMaintainService,
             CheckHistoryMaintainService checkHistoryMaintainService,
             AlarmInfoMaintainService alarmInfoMaintainService,
-            LocalCacheHandler localCacheHandler
+            LocalCacheHandler localCacheHandler,
+            PushHandler pushHandler
     ) {
         this.sectionMaintainService = sectionMaintainService;
         this.checkHistoryMaintainService = checkHistoryMaintainService;
         this.alarmInfoMaintainService = alarmInfoMaintainService;
         this.localCacheHandler = localCacheHandler;
+        this.pushHandler = pushHandler;
     }
 
     @Override
@@ -141,7 +146,7 @@ public class CapacityCheckHandlerImpl implements CapacityCheckHandler {
     }
 
     @Override
-    public CapacityCheckContext getLocalCache(LongIdKey sectionKey) throws HandlerException {
+    public CapacityCheckContext getContext(LongIdKey sectionKey) throws HandlerException {
         lock.lock();
         try {
             return localCacheHandler.getCapacityCheckContext(sectionKey);
@@ -196,6 +201,7 @@ public class CapacityCheckHandlerImpl implements CapacityCheckHandler {
             CheckHistory checkHistory = new CheckHistory(
                     null, sectionKey, limitCapacity, actualCapacity, ratio, happenedDate, currentDevice);
             checkHistoryMaintainService.insert(checkHistory);
+            pushHandler.checkHistoryRecorded(checkHistory);
 
             // 获取指定部件的所有报警设置。
             List<AlarmSetting> alarmSettings = capacityCheckContext.getAlarmSettings();
@@ -217,6 +223,7 @@ public class CapacityCheckHandlerImpl implements CapacityCheckHandler {
                     currentDevice
             );
             alarmInfoMaintainService.insertOrUpdate(alarmInfo);
+            pushHandler.alarmInfoUpdated(alarmInfo);
         } catch (HandlerException e) {
             throw e;
         } catch (Exception e) {

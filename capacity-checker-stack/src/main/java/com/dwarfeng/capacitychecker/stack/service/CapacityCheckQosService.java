@@ -34,7 +34,7 @@ public interface CapacityCheckQosService extends Service {
      * @return 指定部件的容量检查上下文，或者是 null。
      * @throws ServiceException 服务异常。
      */
-    CapacityCheckContext getLocalCache(LongIdKey sectionKey) throws ServiceException;
+    CapacityCheckContext getContext(LongIdKey sectionKey) throws ServiceException;
 
     /**
      * 清除本地缓存。

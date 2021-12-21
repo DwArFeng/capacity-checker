@@ -36,8 +36,10 @@
 
 - 实现检查器模块。
   - com.dwarfeng.capacitychecker.impl.handler.checker.AbstractCheckerRegistry。
-  - com.dwarfeng.capacitychecker.impl.handler.checker.FileSizeCheckerRegistry。
+  - com.dwarfeng.capacitychecker.impl.handler.checker.FileCheckerRegistry。
   - com.dwarfeng.capacitychecker.impl.handler.checker.GroovyCheckerRegistry。
+
+- 完成 QOS 指令。
 
 #### Bug修复
 

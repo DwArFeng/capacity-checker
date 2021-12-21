@@ -42,7 +42,7 @@ public interface CapacityCheckHandler extends Handler {
      * @return 指定部件的容量检查上下文，或者是 null。
      * @throws HandlerException 处理器异常。
      */
-    CapacityCheckContext getLocalCache(LongIdKey sectionKey) throws HandlerException;
+    CapacityCheckContext getContext(LongIdKey sectionKey) throws HandlerException;
 
     /**
      * 清除本地缓存。

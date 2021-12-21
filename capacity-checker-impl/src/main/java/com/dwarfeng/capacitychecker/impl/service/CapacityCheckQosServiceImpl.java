@@ -41,9 +41,9 @@ public class CapacityCheckQosServiceImpl implements CapacityCheckQosService {
     }
 
     @Override
-    public CapacityCheckContext getLocalCache(LongIdKey sectionKey) throws ServiceException {
+    public CapacityCheckContext getContext(LongIdKey sectionKey) throws ServiceException {
         try {
-            return capacityCheckHandler.getLocalCache(sectionKey);
+            return capacityCheckHandler.getContext(sectionKey);
         } catch (Exception e) {
             throw ServiceExceptionHelper.logAndThrow("获取缓存的容量检查上下文时发生异常", LogLevel.WARN, sem, e);
         }
