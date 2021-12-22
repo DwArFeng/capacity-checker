@@ -38,6 +38,7 @@
   - com.dwarfeng.capacitychecker.impl.handler.checker.AbstractCheckerRegistry。
   - com.dwarfeng.capacitychecker.impl.handler.checker.FileCheckerRegistry。
   - com.dwarfeng.capacitychecker.impl.handler.checker.GroovyCheckerRegistry。
+  - com.dwarfeng.capacitychecker.impl.handler.checker.DatabaseCheckerRegistry。
 
 - 完成 QOS 指令。
 
