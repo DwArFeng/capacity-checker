@@ -7,6 +7,8 @@
 - 新增 QOS 指令。
   - com.dwarfeng.capacitychecker.impl.service.telqos.AlarmInfoCommand。
 
+- 优化部分预置的配置文件。
+
 #### Bug修复
 
 - (无)
