@@ -20,6 +20,7 @@
             <telqos:command-impl ref="memoryCommand"/>
             <telqos:command-impl ref="checkCommand"/>
             <telqos:command-impl ref="checkLocalCacheCommand"/>
+            <telqos:command-impl ref="alarmInfoCommand"/>
         </telqos:command>
     </telqos:config>
 

@@ -122,9 +122,6 @@ public class CheckLocalCacheCommand extends CliCommand {
         context.sendMessage("drivers:");
         int index = 0;
         for (Map.Entry<DriverInfo, Driver> entry : capacityCheckContext.getDriverMap().entrySet()) {
-            if (index != 0) {
-                context.sendMessage("");
-            }
             context.sendMessage(String.format("  %-3d %s", ++index, entry.getKey().toString()));
             context.sendMessage(String.format("  %-3d %s", index, entry.getValue().toString()));
         }
@@ -133,9 +130,6 @@ public class CheckLocalCacheCommand extends CliCommand {
         context.sendMessage("alarmSettings:");
         index = 0;
         for (AlarmSetting alarmSetting : capacityCheckContext.getAlarmSettings()) {
-            if (index != 0) {
-                context.sendMessage("");
-            }
             context.sendMessage(String.format("  %-3d %s", ++index, alarmSetting.toString()));
         }
     }
