@@ -18,5 +18,8 @@
         <context:exclude-filter
                 type="regex" expression="^com\.dwarfeng\.capacitychecker\.impl\.handler\.checker\.GroovyChecker.*$"
         />
+        <context:exclude-filter
+                type="regex" expression="^com\.dwarfeng\.capacitychecker\.impl\.handler\.checker\.FileChecker.*$"
+        />
     </context:component-scan>
 </beans>
