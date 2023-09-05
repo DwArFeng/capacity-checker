@@ -51,7 +51,7 @@
         <slf4j.version>1.7.5</slf4j.version>
         <dozer.version>5.5.1</dozer.version>
         <dutil.version>beta-0.2.1.a</dutil.version>
-        <kafka.version>2.4.0</kafka.version>
+        <kafka.version>2.6.3</kafka.version>
         <snowflake.version>1.2.4.a</snowflake.version>
         <subgrade.version>1.2.0.b</subgrade.version>
         <spring-terminator.version>1.0.7.a</spring-terminator.version>
